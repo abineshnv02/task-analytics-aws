@@ -1,0 +1,28 @@
+name: Django AWS Deploy
+
+on:
+  push:
+    branches: [ master ]  # This triggers ONLY when code hits the master branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code from GitHub
+        uses: actions/checkout@v3
+
+      - name: Log into AWS and Update Code
+        uses: appleboy/ssh-action@master
+        with:
+          host: 54.252.162.206
+          username: ubuntu
+          key: ${{ secrets.AWS_SSH_KEY }}
+          script: |
+            cd ~/PythonProjects/task-analytics-aws
+            git pull origin master
+            source venv/bin/activate
+            pip install -r requirements.txt
+            python3 manage.py migrate
+            # This kills the old process so the new one can take Port 8000
+            sudo fuser -k 8000/tcp || true
+            nohup python3 manage.py runserver 0.0.0.0:8000 > django.log 2>&1 &
