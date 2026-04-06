@@ -6,7 +6,7 @@ def index(request):
                      font-family: Arial; text-align: center; color: white; padding-top: 100px;">
             <h1 style="font-size: 50px;">🚀 CI/CD Pipeline Active!</h1>
             <p style="font-size: 20px;">
-                Deployed from <b>feature-update-view</b> via GitHub Actions.
+                Deployed from <b>feature-update-view from ics PC</b> via GitHub Actions.
             </p>
         </body>
     """)
