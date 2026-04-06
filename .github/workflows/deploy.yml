@@ -16,7 +16,7 @@ jobs:
         with:
           host: 40.192.38.65
           username: ubuntu
-          key: ${{ secrets.AWS_SSH_KEY }}
+          key: ${{ secrets.AWS_ICS_SSH_KEY }}
           script: |
             cd ~/PythonProjects/task-analytics-aws
             git pull origin master
